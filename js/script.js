@@ -11,3 +11,49 @@ window.onclick = function(event) {
         signupModal.style.display = "none";
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadPosts();
+
+    const newPostForm = document.querySelector('#newPostModal form');
+    if (newPostForm) {
+        newPostForm.addEventListener('submit', event => {
+            event.preventDefault();
+            createNewPost(newPostForm);
+        });
+    }
+});
+
+function loadPosts() {
+    fetch('php/get_posts.php')
+        .then(response => response.json())
+        .then(posts => {
+            const postsContainer = document.getElementById('posts');
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+                postsContainer.appendChild(postElement);
+            });
+        })
+        .catch(error => console.error('Error loading posts:', error));
+}
+
+function createNewPost(form) {
+    const formData = new FormData(form);
+    fetch('php/create_post.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            document.getElementById('newPostModal').style.display = 'none';
+            form.reset();
+            loadPosts();
+        } else {
+            alert('Error creating post');
+        }
+    })
+    .catch(error => console.error('Error creating post:', error));
+}
