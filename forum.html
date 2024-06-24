@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <!-- Other menu items -->
+                <li><a href="index.html">Home</a></li>
+                <li><a href="forum.html">Forum</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button onclick="document.getElementById('loginModal').style.display='block'">Login</button>
+            <button onclick="document.getElementById('signupModal').style.display='block'">Sign Up</button>
+        </div>
+    </header>
+    
+    <div class="main-content">
+        <h2 style="color: white;">Discussion Forum</h2>
+        <div id="posts">
+            <!-- Posts will be dynamically loaded here -->
+        </div>
+        <button onclick="document.getElementById('newPostModal').style.display='block'">New Post</button>
+    </div>
+
+    <!-- New Post Modal -->
+    <div id="newPostModal" class="modal">
+        <form class="modal-content" action="php/create_post.php" method="post">
+            <span onclick="document.getElementById('newPostModal').style.display='none'" class="close">&times;</span>
+            <h2>Create a New Post</h2>
+            <label for="postTitle">Title:</label>
+            <input type="text" id="postTitle" name="title" required>
+            <label for="postContent">Content:</label>
+            <textarea id="postContent" name="content" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
