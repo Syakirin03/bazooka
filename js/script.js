@@ -11,17 +11,14 @@ window.onclick = function(event) {
         signupModal.style.display = "none";
     }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     loadPosts();
 
-    const newPostForm = document.querySelector('#newPostModal form');
-    if (newPostForm) {
-        newPostForm.addEventListener('submit', event => {
-            event.preventDefault();
-            createNewPost(newPostForm);
-        });
-    }
+    const newPostForm = document.getElementById('newPostForm');
+    newPostForm.addEventListener('submit', event => {
+        event.preventDefault();
+        createNewPost(newPostForm);
+    });
 });
 
 function loadPosts() {
@@ -29,9 +26,10 @@ function loadPosts() {
         .then(response => response.json())
         .then(posts => {
             const postsContainer = document.getElementById('posts');
+            postsContainer.innerHTML = ''; // Clear existing posts
             posts.forEach(post => {
                 const postElement = document.createElement('div');
-                postElement.className = 'post';
+                postElement.className = 'posts';
                 postElement.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
                 postsContainer.appendChild(postElement);
             });
