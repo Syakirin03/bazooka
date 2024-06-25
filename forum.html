@@ -13,7 +13,6 @@
         </div>
         <nav>
             <ul>
-                <!-- Other menu items -->
                 <li><a href="index.html">Home</a></li>
                 <li><a href="forum.html">Forum</a></li>
             </ul>
@@ -22,19 +21,20 @@
             <button onclick="document.getElementById('loginModal').style.display='block'">Login</button>
             <button onclick="document.getElementById('signupModal').style.display='block'">Sign Up</button>
         </div>
+        
     </header>
     
     <div class="main-content">
-        <h2 style="color: white;">Discussion Forum</h2>
-        <div id="posts">
-            <!-- Posts will be dynamically loaded here -->
+        <h2 class="forum-title" style="color: white;">Discussion Forum</h2>
+        <div style="color: white;" id="posts">
+
         </div>
         <button onclick="document.getElementById('newPostModal').style.display='block'">New Post</button>
     </div>
 
     <!-- New Post Modal -->
     <div id="newPostModal" class="modal">
-        <form class="modal-content" action="php/create_post.php" method="post">
+        <form id="newPostForm" class="modal-content">
             <span onclick="document.getElementById('newPostModal').style.display='none'" class="close">&times;</span>
             <h2>Create a New Post</h2>
             <label for="postTitle">Title:</label>
@@ -45,6 +45,6 @@
         </form>
     </div>
 
-    <script src="js/scripts.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
