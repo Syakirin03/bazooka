@@ -16,16 +16,13 @@ echo '<!DOCTYPE html>
         <ul>
             <li class="dropdown">Catalog
                 <ul class="dropdown-content">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
+                    <li><a href="#">PDF</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Past Year Papers</a></li>
                 </ul>
             </li>
             <li class="dropdown">Researcher
                 <ul class="dropdown-content">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
                 </ul>
             </li>
             <li class="dropdown">Community
