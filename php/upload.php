@@ -20,4 +20,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "No file was uploaded or there was an error with the upload.";
     }
 }
-?>

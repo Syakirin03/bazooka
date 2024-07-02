@@ -1,25 +1,36 @@
 <?php
-session_start();
-include 'db.php';
+include '../database/db.php'; // Include your connection file
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash the password
     $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
 
-    $sql = "INSERT INTO users (username, password, email) VALUES ('$username', '$password', '$email')";
+    // Prepare and bind
+    if ($stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)")) {
+        $stmt->bind_param("sss", $username, $email, $password);
 
-    if ($conn->query($sql) === TRUE) {
-        header("Location: ../Prototype.html");
-        exit();
+        if ($stmt->execute()) {
+            // Registration successful
+            echo "<script src='../js/script3.js'></script>";
+            echo "<script>
+                    showAlert('Registration successful. You can now login.', 'loginpage.php');
+                  </script>";
+        } else {
+            // Registration failed
+            echo "<script src='../js/script3.js'></script>";
+            echo "<script>
+                    showAlert('Error: " . $stmt->error . "', window.history.back());
+                  </script>";
+        }
+
+        $stmt->close();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "<script src='../js/script3.js'></script>";
+        echo "<script>
+                showAlert('Error: " . $conn->error . "', window.history.back());
+              </script>";
     }
-}
 
-$conn->close();
-?>
+    $conn->close();
+}

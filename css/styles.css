@@ -58,17 +58,44 @@ nav a {
     display: block;
 }
 
-.auth-buttons button {
-    background-color: #EDE6D6;
-    color: black;
-    border: none;
-    padding: 10px 20px;
+.auth-buttons .user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    margin-left: 10px;
 }
 
-.auth-buttons button:hover {
-    background-color: #ddd;
+.auth-buttons .user-menu img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.auth-buttons .user-menu .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 120px;
+}
+
+.auth-buttons .user-menu:hover .dropdown-content {
+    display: block;
+}
+
+.auth-buttons .user-menu .dropdown-content a {
+    color: white;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.auth-buttons .user-menu .dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .main-content {
