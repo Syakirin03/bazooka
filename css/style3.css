@@ -199,21 +199,70 @@ nav li:hover .dropdown-content {
 .left-frame {
     width: 300px; /* Adjust as needed */
     height: 300px; /* Adjust as needed */
-    margin: 20px 50px; /* Adjust to move down and right */
+    margin: 50px 50px; /* Adjust to move down and right */
     position: relative;
     overflow: hidden;
 }
 
 .hexagon-frame img {
-    margin-top: 200px;
-    position: relative;
+    position: absolute;
+    top: 50px; /* Adjust as needed to move down */
+    left: 50px; /* Adjust as needed to move right */
     width: 100%;
     height: auto;
     display: block;
     clip-path: polygon(
         30% 10%, /* Top-left vertex */
         70% 10%, /* Top-right vertex */
-        85% 50%, /* Middle-right vertex */
+        83% 49%, /* Middle-right vertex */
+        70% 90%, /* Bottom-right vertex */
+        30% 90%, /* Bottom-left vertex */
+        15% 50% /* Middle-left vertex */
+    );
+}
+.left-frame2 {
+    width: 300px; /* Adjust as needed */
+    height: 300px; /* Adjust as needed */
+    margin: 135px -640px; /* Adjust to move down and right */
+    position: relative;
+    overflow: hidden;
+}
+
+.hexagon-frame2 img {
+    position: absolute;
+    top: 50px; /* Adjust as needed to move down */
+    left: 50px; /* Adjust as needed to move right */
+    width: 100%;
+    height: auto;
+    display: block;
+    clip-path: polygon(
+        30% 10%, /* Top-left vertex */
+        70% 10%, /* Top-right vertex */
+        83% 49%, /* Middle-right vertex */
+        70% 90%, /* Bottom-right vertex */
+        30% 90%, /* Bottom-left vertex */
+        15% 50% /* Middle-left vertex */
+    );
+}
+.left-frame3 {
+    width: 320px; /* Adjust as needed */
+    height: 320px; /* Adjust as needed */
+    margin: 220px 50px; /* Adjust to move down and right */
+    position: relative;
+    overflow: hidden;
+}
+
+.hexagon-frame3 img {
+    position: absolute;
+    top: 50px; /* Adjust as needed to move down */
+    left: 50px; /* Adjust as needed to move right */
+    width: 100%;
+    height: auto;
+    display: block;
+    clip-path: polygon(
+        30% 10%, /* Top-left vertex */
+        70% 10%, /* Top-right vertex */
+        83% 49%, /* Middle-right vertex */
         70% 90%, /* Bottom-right vertex */
         30% 90%, /* Bottom-left vertex */
         15% 50% /* Middle-left vertex */
@@ -323,4 +372,74 @@ form button {
 .posts p {
     color: white; /* Change to white */
     font-size: 16px; /* Adjust font size if needed */
+}
+
+.explore-text {
+    font: italic;
+    color: white;
+    margin-left: 1070px;
+    position: absolute;
+    margin-top: 170px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: white; /* Change header color to white */
+}
+
+.custom-file-upload {
+    margin-left: 20px;
+    width: 158px;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white; /* Change text color to white */
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid white;
+    border-radius: 4px;
+}
+
+#pdfFile {
+    display: none; /* Hide the default file input */
+}
+
+button {
+    margin-left: 20px;
+    width: 200px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid white;
+    border-radius: 4px;
+};
+
+
+.video-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.video-item {
+    margin: 10px;
+    text-align: center;
+}
+.video-item iframe {
+    width: 560px;
+    height: 340px;
+}
+.video-description {
+    color: white;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.gg{
+    color: white;
+    font: bold;
 }

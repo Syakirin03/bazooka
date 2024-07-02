@@ -5,11 +5,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $fileMimeType = mime_content_type($_FILES['pdfFile']['tmp_name']);
         
         if (in_array($fileMimeType, $allowedMimeTypes)) {
-            $uploadDir = 'uploads/';
+            $uploadDir = '../uploaded/';
             $uploadFile = $uploadDir . basename($_FILES['pdfFile']['name']);
             
             if (move_uploaded_file($_FILES['pdfFile']['tmp_name'], $uploadFile)) {
-                echo "The file ". htmlspecialchars(basename($_FILES['pdfFile']['name'])). " has been uploaded.";
+                // Show a success message using JavaScript alert
+                echo '<script>alert("File uploaded successfully."); window.location.href = "uploadpage.php";</script>';
             } else {
                 echo "Sorry, there was an error uploading your file.";
             }
@@ -20,3 +21,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "No file was uploaded or there was an error with the upload.";
     }
 }
+?>
