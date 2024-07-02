@@ -108,18 +108,18 @@ nav a {
     box-sizing: border-box;
 }
 
-.left-frame {
+.left-frame{
     width: 300px; /* Adjust as needed */
     height: 300px; /* Adjust as needed */
-    margin: 20px 50px; /* Adjust to move down and right */
+    margin: 110px 50px; /* Adjust to move down and right */
     position: relative;
     overflow: hidden;
 }
 
-.hexagon-frame img {
+.hexagon-frame img{
     position: absolute;
-    top: 50px; /* Adjust as needed to move down */
-    left: 50px; /* Adjust as needed to move right */
+    top: 1150px; /* Adjust as needed to move down */
+    left: 1150px; /* Adjust as needed to move right */
     width: 100%;
     height: auto;
     display: block;
@@ -135,7 +135,7 @@ nav a {
 
 
 .explore {
-    margin: 20px;
+    margin: 200px;
 }
 
 .explore button {

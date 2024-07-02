@@ -10,22 +10,18 @@ echo '<!DOCTYPE html>
 <body>
 <header>
     <div class="logo">
-        <img src="images/logo.png" alt="Logo">
+        <img src="../images/logo.png" alt="Logo">
     </div>
     <nav>
         <ul>
             <li class="dropdown">Catalog
                 <ul class="dropdown-content">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
+                    <li><a href="php/uploadpage.php">Upload PDF</a></li>
+                    <li><a href="#">Videos</a></li>
                 </ul>
             </li>
             <li class="dropdown">Researcher
                 <ul class="dropdown-content">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
                 </ul>
             </li>
             <li class="dropdown">Community
