@@ -191,10 +191,13 @@ if(isset($_SESSION['username'])) {
             </li>
             <li class="dropdown">Researcher
                 <ul class="dropdown-content">
-            </ul>
+                    <li><a href="php/viewpdflogin.php">View PDF</a></li>
+                    <li><a href="php/viewcontentlogin.php">View Video</a></li>
+                </ul>
             </li>
             <li class="dropdown">Community
                 <ul class="dropdown-content">
+                    <li><a href="php/forum/index2.php">Forum</a></li>
                 </ul>
             </li>
         </ul>
@@ -233,12 +236,12 @@ if(isset($_SESSION['username'])) {
     <div class="card">
         <h3>Forum</h3>
         <p>View and start your discussion with others and friends.</p>
-        <a href="#">Go to Forum</a>
+        <a href="php/forum/index2.php">Go to Forum</a>
     </div>
     <div class="card">
         <h3>Resources</h3>
         <p>Access and manage your educational resources.</p>
-        <a href="#">View Resources</a>
+        <a href="php/viewcontentlogin.php">View Resources</a>
     </div>
     <div class="card">
         <h3>Settings</h3>

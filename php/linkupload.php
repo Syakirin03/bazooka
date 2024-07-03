@@ -40,6 +40,23 @@ if (isset($_GET['delete_video_id'])) {
     exit;
 }
 
+// Handle video edit
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_video_id'])) {
+    $editVideoId = $_POST['edit_video_id'];
+    $newYoutubeLink = $conn->real_escape_string($_POST['editYoutubeLink']);
+    $newDescription = $conn->real_escape_string($_POST['editDescription']);
+
+    // Update existing video link and description in database
+    $sql = "UPDATE youtube_videos SET youtube_link = '$newYoutubeLink', description = '$newDescription' WHERE video_id = $editVideoId AND user_id = $userId";
+    if ($conn->query($sql) !== TRUE) {
+        echo "Error updating video: " . $conn->error;
+    } else {
+        // Redirect to clear form submission data
+        echo '<script>alert("YouTube video details updated successfully."); window.location.href = "' . $_SERVER['PHP_SELF'] . '";</script>';
+        exit;
+    }
+}
+
 // Query to fetch all YouTube videos uploaded by the user
 $sql = "SELECT * FROM youtube_videos WHERE user_id = $userId";
 $result = $conn->query($sql);
@@ -121,6 +138,40 @@ $result = $conn->query($sql);
         .link-preview {
             margin-top: 20px;
         }
+        .edit-form {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .edit-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+        .edit-modal-content {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .edit-modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+        .edit-modal-close:hover {
+            color: white;
+        }
     </style>
     <script>
         function updateLinkPreview() {
@@ -133,6 +184,24 @@ $result = $conn->query($sql);
             } else {
                 previewContainer.innerHTML = 'Invalid YouTube link';
             }
+        }
+
+        function showEditForm(videoId, youtubeLink, description) {
+            const editForm = document.getElementById('editForm');
+            const editYoutubeLink = document.getElementById('editYoutubeLink');
+            const editDescription = document.getElementById('editDescription');
+
+            editForm.style.display = 'block';
+            editYoutubeLink.value = youtubeLink;
+            editDescription.value = description;
+
+            // Set the hidden input value for the video ID
+            document.getElementById('edit_video_id').value = videoId;
+        }
+
+        function hideEditModal() {
+            const editModal = document.getElementById('editModal');
+            editModal.style.display = 'none'; // Hide the edit modal
         }
     </script>
 </head>
@@ -171,6 +240,7 @@ $result = $conn->query($sql);
                 while ($row = $result->fetch_assoc()) {
                     $youtubeLink = $row['youtube_link'];
                     $description = $row['description'];
+                    $videoId = $row['video_id'];
 
                     // Extract video ID from YouTube URL
                     preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $youtubeLink, $matches);
@@ -180,13 +250,47 @@ $result = $conn->query($sql);
                     echo '<div class="card video-item">';
                     echo '<iframe width="560" height="315" src="https://www.youtube.com/embed/' . $videoID . '" frameborder="0" allowfullscreen></iframe>';
                     echo '<div class="video-description">' . $description . '</div>';
-                    echo '<button class="delete-button" onclick="deleteVideo(' . $row['video_id'] . ')">Delete</button>';
+                    echo '<button onclick="showEditForm(' . $videoId . ', \'' . $youtubeLink . '\', \'' . $description . '\')">Edit</button>';
+                    echo '<button class="delete-button" onclick="deleteVideo(' . $videoId . ')">Delete</button>';
                     echo '</div>';
+
+                    echo '<div id="editModal' . $videoId . '" class="edit-modal">';
+                    echo '<div class="edit-modal-content">';
+                    echo '<span class="edit-modal-close" onclick="hideEditModal(' . $videoId . ')">&times;</span>';
+                    echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">';
+                    echo '<input type="hidden" name="edit_video_id" value="' . $videoId . '">';
+                    echo '<label for="editYoutubeLink">Edit YouTube Link:</label>';
+                    echo '<input type="text" id="editYoutubeLink' . $videoId . '" name="editYoutubeLink" value="' . $youtubeLink . '" required><br>';
+                    echo '<label for="editDescription">Edit Description:</label>';
+                    echo '<textarea id="editDescription' . $videoId . '" name="editDescription" rows="4" required>' . $description . '</textarea><br>';
+                    echo '<button type="submit" name="submit_edit">Save Changes</button>';
+                    echo '</form>';
+                    echo '</div>';
+        echo '</div>';
                 }
             } else {
                 echo '<div class="card">No videos uploaded yet.</div>';
             }
             ?>
+        </div>
+
+        <!-- Edit Form -->
+        <div id="editForm" class="card edit-form">
+            <h2>Edit Video Details</h2>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <input type="hidden" id="edit_video_id" name="edit_video_id">
+                <div class="form-group">
+                    <label for="editYoutubeLink">Edit YouTube Video Link:</label>
+                    <input type="text" id="editYoutubeLink" name="editYoutubeLink" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDescription">Edit Brief Description:</label>
+                    <textarea id="editDescription" name="editDescription" rows="4" required></textarea>
+                </div>
+                <div>
+                    <button type="submit">Update Video</button>
+                </div>
+            </form>
         </div>
     </div>
     <script>

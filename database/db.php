@@ -11,6 +11,22 @@ $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+function getUsername($conn, $userId) {
+    // Check if $userId is not null and is a valid integer
+    if (!isset($userId) || !is_numeric($userId)) {
+        return "Unknown"; // Return a default value or handle accordingly
+    }
+
+    $sql = "SELECT username FROM users WHERE userid = $userId";
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['username'];
+    } else {
+        return "Unknown"; // Return a default value or handle accordingly
+    }
+}
 
 // Check if database exists, if not, create it
 $check_database_query = "CREATE DATABASE IF NOT EXISTS $dbname";

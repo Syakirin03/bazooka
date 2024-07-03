@@ -10,7 +10,6 @@ if (!isset($_SESSION['userid'])) {
     exit();
 }
 
-// Function to fetch PDF files uploaded by the user
 function fetchUploadedPDFs($conn) {
     $userId = $_SESSION['userid'];
     $sql = "SELECT * FROM pdf_files WHERE user_id = $userId";
@@ -24,7 +23,6 @@ function fetchUploadedPDFs($conn) {
     }
     return $pdfFiles;
 }
-
 // Handle file deletion confirmation
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirmDelete'])) {
     $fileId = $_POST['fileId'];
