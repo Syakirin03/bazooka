@@ -13,6 +13,7 @@ if(isset($_SESSION['username'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webpage</title>
+    <link rel="icon" href="./images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style3.css"> <!-- Ensure style3.css is correctly linked -->
     <style>
         /* Additional CSS styles specific to this page */
@@ -118,6 +119,61 @@ if(isset($_SESSION['username'])) {
         .sub-menu-link:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
+
+        .welcome-section,
+        .dashboard {
+            background-color: rgba(249, 249, 249, 0.8); /* Adjust transparency as needed */
+            border-radius: 10px; /* Optional: Add rounded corners for a nicer look */
+            padding: 20px;
+            margin: 20px auto; /* Optional: Adjust margin for positioning */
+        }
+
+        .dashboard {
+            background-color: #FFF5EE; /* Peach color */
+            display: flex;
+            justify-content: space-around;
+            align-items: stretch; /* Ensure cards stretch vertically */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .dashboard .card {
+            background-color: rgba(211, 211, 211, 0.8); /* Example: Adjust color for cards */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            height: 100%; /* Set cards to occupy full height */
+            display: flex; /* Ensure content inside card can flex */
+            flex-direction: column; /* Arrange content vertically */
+        }
+
+        .dashboard .card h3 {
+            margin-bottom: 15px;
+        }
+
+        .dashboard .card p {
+            margin-bottom: 10px;
+            flex: 1; /* Allow paragraph to grow and fill remaining space */
+        }
+
+        .dashboard .card a {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none; /* Remove underline */
+            color: #333; /* Change link color */
+            border: 1px solid #ccc; /* Add border */
+            border-radius: 5px; /* Optional: Add rounded corners */
+            transition: background-color 0.3s, color 0.3s ease; /* Smooth transitions */
+        }
+
+        .dashboard .card a:hover {
+            background-color: #f0f0f0; /* Change background on hover */
+            color: #555; /* Change text color on hover */
+        }
     </style>
 </head>
 <body>
@@ -127,19 +183,15 @@ if(isset($_SESSION['username'])) {
     </div>
     <nav>
         <ul>
-            <li class="dropdown">Forum
+            <li class="dropdown">Catalog
                 <ul class="dropdown-content">
-                    <li><a href="php/thread.php">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
+                    <li><a href="php/uploadpage.php">Upload PDF</a></li>
+                    <li><a href="php/linkupload.php">Upload Video</a></li>
                 </ul>
             </li>
             <li class="dropdown">Researcher
                 <ul class="dropdown-content">
-                    <li><a href="#">Item 1</a></li>
-                    <li><a href="#">Item 2</a></li>
-                    <li><a href="#">Item 3</a></li>
-                </ul>
+            </ul>
             </li>
             <li class="dropdown">Community
                 <ul class="dropdown-content">
@@ -171,6 +223,29 @@ if(isset($_SESSION['username'])) {
         </div>
     </div>
 </header>
+
+<div class="welcome-section">
+    <h2>Welcome to the Educational Page</h2>
+    <p>Explore the features and functionalities available to you.</p>
+</div>
+
+<div class="dashboard">
+    <div class="card">
+        <h3>Forum</h3>
+        <p>View and start your discussion with others and friends.</p>
+        <a href="#">Go to Forum</a>
+    </div>
+    <div class="card">
+        <h3>Resources</h3>
+        <p>Access and manage your educational resources.</p>
+        <a href="#">View Resources</a>
+    </div>
+    <div class="card">
+        <h3>Settings</h3>
+        <p>Adjust your account settings and preferences.</p>
+        <a href="php/user/operation.php">Account Settings</a>
+    </div>
+</div>
 
 <script>
 function toggleProfileDropDown(event) {

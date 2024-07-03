@@ -8,6 +8,7 @@ echo '<!DOCTYPE html>
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style2.css">
     <title>Login & Registration</title>
+    <link rel="icon" href="../images/utm.png" type="image/x-icon">
 </head>
 <body>
     <div class="wrapper">
